@@ -13,11 +13,11 @@ import java.util.Map;
 
 public class myTask implements Runnable {
 	
-	private Integer SucNum;
+	private int[] SucNum;
 	private int filenum;
 	private ArrayList<String> filepath;
 	
-	public  myTask(Integer SucNum) {
+	public  myTask(int[] SucNum) {
 		this.SucNum=SucNum;
 		filepath=getImageName("/etc/upload/figure/filepath.txt");
 		filenum=filepath.size();
@@ -36,7 +36,8 @@ public class myTask implements Runnable {
 				e.printStackTrace();
 			}
 			visitImage(filepath.get(j));
-			SucNum++;
+			
+			//System.out.printf("正确率%d/30", SucNum);
 				
 		}
 	
@@ -77,9 +78,16 @@ public class myTask implements Runnable {
 			conn.connect();
 			
 			Map< String, List < String >> map =conn.getHeaderFields();
+			/*
 			for(String key:map.keySet()){
-				System.out.println(key + "--->" + map.get(key));
+				//System.out.println(key + "--->" + map.get(key));
+				SucNum[0]++;
 			}
+			*/
+			
+			if(map.get(null).toString().split(" ")[1].equals("200"))
+			//System.out.println("--->" + map.get(null).toString().split(" ")[1]);
+			SucNum[0]++;
 		}catch(Exception e){
 			e.printStackTrace();
 		}

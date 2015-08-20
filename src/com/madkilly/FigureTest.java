@@ -23,7 +23,7 @@ import java.util.concurrent.TimeoutException;
 public class FigureTest {
 
 	public static void main(String[] args) {
-		Integer SucNum=0;
+		int[] SucNum={0};
 		myTask T=new myTask(SucNum);
 		ExecutorService pool=Executors.newFixedThreadPool(5);
 		
@@ -31,8 +31,14 @@ public class FigureTest {
 			Thread pT=new Thread(T);
 			pool.execute(pT);
 		}
-		pool.shutdown();
-		System.out.printf("正确率%d/30", SucNum);
+		//pool.shutdown();
+		try {
+			pool.awaitTermination(20, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		System.out.printf("正确率%d/30", SucNum[0]);
 	}
 	
 
