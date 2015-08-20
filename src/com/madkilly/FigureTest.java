@@ -29,7 +29,7 @@ public class FigureTest {
 		
 		for(int i=0;i<6;i++){
 			Thread pT=new Thread(T);
-			pool.equals(pT);
+			pool.execute(pT);
 		}
 		pool.shutdown();
 		System.out.printf("正确率%d/30", SucNum);
